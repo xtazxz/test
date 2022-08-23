@@ -1,0 +1,16 @@
+#!groovy
+properties properties: [buildDiscarder(logRotator(numToKeepStr: '10'))]
+
+node('devops') {
+
+    def APPLICATION = "email"
+    def SERVER_IP = "192.168.104.167"
+    def SERVER_CREDENTIALS = "s-pep-java-in-test_192.168.104.167"
+
+    stage("package") {
+        checkout scm
+        sh """
+           more README.md
+        """
+    }
+}
