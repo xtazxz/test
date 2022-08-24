@@ -43,7 +43,7 @@ pipeline {
                 echo '============='
             """
             println("${SEND_RESULT_TO}")
-            println("[构建${env.BUILD_STATUS}]: ${env.JOB_NAME} (${env.BUILD_NUMBER})")
+            println("[构建${BUILD_STATUS}]: ${JOB_NAME} (${env.BUILD_NUMBER})")
             emailext(
                     subject: '[构建${BUILD_STATUS}]: ${JOB_NAME} (${BUILD_NUMBER})',
                     body: '${FILE, path="jenkins-email.template"}',
