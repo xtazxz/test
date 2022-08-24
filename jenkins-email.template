@@ -3,11 +3,11 @@
     <h4><font color="#0B610B">构建信息</font></h4>
 		<hr size="2" width="100%" />
 		<ul>
-				<li>项目名称： ${ENV, var="JOB_NAME"}</li>
-				<li>构建编号： 第${BUILD_NUMBER}次构建</li>
-				<li>触发原因： ${CAUSE}</li>
-				<li>构建状态： ${BUILD_STATUS}</li>
-				<li>构建日志： <a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
+				<li><b>项目名称</b>： ${ENV, var="JOB_NAME"}</li>
+				<li><b>构建编号</b>： 第${BUILD_NUMBER}次构建</li>
+				<li><b>触发原因</b>： ${CAUSE}</li>
+				<li><b>构建状态</b>： ${BUILD_STATUS}</li>
+				<li><b>构建日志</b>： <a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
     </ul>
     <hr size="2" width="100%" />
     <p style="color: red;font-style: initial;">系统通知邮件, 请勿回复!!!</p>
