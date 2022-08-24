@@ -5,7 +5,7 @@ pipeline {
 
     agent any
 
-    environment{
+    environment {
         APPLICATION = "email"
         SERVER_IP = "192.168.104.167"
         SERVER_CREDENTIALS = "s-pep-java-in-test_192.168.104.167"
@@ -15,9 +15,9 @@ pipeline {
         stage("package") {
             checkout scm
             sh """
-           mvn package
-           more README.md
-        """
+                mvn package
+                more README.md
+            """
         }
     }
 
@@ -26,18 +26,18 @@ pipeline {
             sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
             sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
             sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
-            emailext (
-                subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                body: '${FILE, path="email-html.template"}',
-                to: 'xtazxz@qq.com',
-                from: 'PEP Jenkins <devops@pep.com.cn>'
+            emailext(
+                    subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
+                    body: '${FILE, path="email-html.template"}',
+                    to: 'xtazxz@qq.com',
+                    from: 'PEP Jenkins <devops@pep.com.cn>'
             )
         }
         failure {
             sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
             sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
             sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
-            emailext (
+            emailext(
                     subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                     body: '${FILE, path="email-html.template"}',
                     to: 'xtazxz@qq.com',
