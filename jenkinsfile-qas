@@ -38,7 +38,7 @@ pipeline {
                 sed -i "s/#JOB_NAME#/${JOB_NAME}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
                 sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
                 sed -i "s/#CAUSE#/${currentBuild.result}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
-                sed -i "s/#BUILD_URL#/${BUILD_URL}console/g" ${NOTIFICATION_EMAIL_TEMPLATE}
+                sed -i "s#BUILD_URL#${BUILD_URL}console#g" ${NOTIFICATION_EMAIL_TEMPLATE}
             """
             emailext(
                     subject: '[构建${BUILD_STATUS}]: ${JOB_NAME} [${BUILD_NUMBER}]',
