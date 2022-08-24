@@ -3,7 +3,7 @@
     <h4><font color="#0B610B">构建信息</font></h4>
 		<hr size="2" width="100%" />
 		<ul>
-				<li><b>项目名称</b>： ${ENV, var="JOB_NAME"}</li>
+				<li><b>程序名称</b>： ${ENV, var="JOB_NAME"}</li>
 				<li><b>构建编号</b>： 第${BUILD_NUMBER}次构建</li>
 				<li><b>触发原因</b>： ${CAUSE}</li>
 				<li><b>构建状态</b>： ${BUILD_STATUS}</li>
