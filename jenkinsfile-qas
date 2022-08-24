@@ -12,12 +12,23 @@ pipeline {
     }
 
     stages {
-        stage("package") {
+        stage("Checkout") {
             steps {
                 checkout scm
+            }
+        }
+        stage("Package") {
+            steps {
                 sh """
                     mvn package
                     more README.md
+                """
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh """
+                    echo deploy success
                 """
             }
         }
@@ -50,7 +61,7 @@ pipeline {
                 sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" jenkins-email.html
             """
             emailext(
-                    subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
+                    subject: '[构建失败]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                     body: '${FILE, path="jenkins-email.html"}',
                     to: 'xtazxz@qq.com',
                     from: 'PEP Jenkins <devops@pep.com.cn>'
