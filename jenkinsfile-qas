@@ -13,11 +13,13 @@ pipeline {
 
     stages {
         stage("package") {
-            checkout scm
-            sh """
-                mvn package
-                more README.md
-            """
+            steps {
+                checkout scm
+                sh """
+                    mvn package
+                    more README.md
+                """
+            }
         }
     }
 
