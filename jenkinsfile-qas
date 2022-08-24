@@ -9,6 +9,7 @@ pipeline {
         APPLICATION = "email"
         SERVER_IP = "192.168.104.167"
         SERVER_CREDENTIALS = "s-pep-java-in-test_192.168.104.167"
+        SEND_RESULT_TO = "xtazxz@qq.com"
     }
 
     stages {
@@ -39,9 +40,9 @@ pipeline {
                 sed -i "s#PARAM_BUILD_URL#${BUILD_URL}console#g" jenkins-email.template
             """
             emailext(
-                    subject: '[构建${currentBuild.result}]: ${JOB_NAME} (#${BUILD_NUMBER})',
+                    subject: '[构建${currentBuild.result}]: ${JOB_NAME} [${BUILD_NUMBER}]',
                     body: '${FILE, path="jenkins-email.template"}',
-                    to: 'xtazxz@qq.com'
+                    to: '${SEND_RESULT_TO}'
             )
         }
     }
