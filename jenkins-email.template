@@ -7,7 +7,7 @@
 				<li><b>构建编号</b>： 第${BUILD_NUMBER}次构建</li>
 				<li><b>触发原因</b>： ${CAUSE}</li>
 				<li><b>构建状态</b>： ${BUILD_STATUS}</li>
-				<li><b>构建时长</b>： ${ENV, var="currentBuild.durationString"}</li>
+				<li><b>构建时长</b>： ${ENV, var="durationString"}</li>
 				<li><b>构建日志</b>： <a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
     </ul>
     <hr size="2" width="100%" />
