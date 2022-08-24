@@ -40,7 +40,7 @@ pipeline {
                 sed -i "s#PARAM_BUILD_URL#${BUILD_URL}console#g" jenkins-email.template
             """
             emailext(
-                    subject: '[构建${BUILD_STATUS}]: ${JOB_NAME} (${BUILD_NUMBER})',
+                    subject: '[Jenkins Job]: ${BUILD_STATUS} - ${JOB_NAME} (#${BUILD_NUMBER})',
                     body: '${FILE, path="jenkins-email.template"}',
                     to: 'xtazxz@qq.com'
             )

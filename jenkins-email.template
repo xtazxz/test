@@ -1,21 +1,15 @@
 <body>
-<p>构建信息: PARAM_JOB_NAME (#PARAM_BUILD_NUMBER)</p>
-<p>构建结果: PARAM_RESULT</p>
-<p>构建日志: PARAM_BUILD_URL</p>
-<br>
 <div>
     <h4><font color="#0B610B">构建信息</font></h4>
 		<hr size="2" width="100%" />
 		<ul>
-				<li>项目名称： ${JOB_NAME}</li>
 				<li>项目名称： ${ENV, var="JOB_NAME"}</li>
 				<li>构建编号： 第${BUILD_NUMBER}次构建</li>
 				<li>触发原因： ${CAUSE}</li>
 				<li>构建状态： ${BUILD_STATUS}</li>
 				<li>构建日志： <a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
-				<li>构建 Url ： <a href="${BUILD_URL}">${BUILD_URL}</a></li>
-				<li>项目 Url ： <a href="${PROJECT_URL}">${PROJECT_URL}</a></li>
     </ul>
+    <hr size="2" width="100%" />
+    <p style="color: red;font-style: initial;">系统通知邮件, 请勿回复!!!</p>
 </div>
-<p style="color: red;font-style: initial;">通知邮件, 请勿回复!!!</p>
 </body>
