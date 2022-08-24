@@ -42,7 +42,7 @@ pipeline {
                 echo '${SEND_RESULT_TO}'
             """
             emailext(
-                    subject: '[构建${currentBuild.result}]: ${JOB_NAME} [${BUILD_NUMBER}]',
+                    subject: '[构建${BUILD_STATUS}]: ${JOB_NAME} [${BUILD_NUMBER}]',
                     body: '${FILE, path="jenkins-email.template"}',
                     to: 'xtazxz@qq.com'
             )
