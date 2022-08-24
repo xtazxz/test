@@ -28,13 +28,14 @@ pipeline {
             sh """
                 echo 构建成功
                 pwd
-                sed -i "s/#APPLICATION#/${APPLICATION}/g" ./email-html.template
-                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" ./email-html.template
-                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" ./email-html.template
+                ls -rlt
+                sed -i "s/#APPLICATION#/${APPLICATION}/g" jenkins-email.html
+                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" jenkins-email.html
+                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" jenkins-email.html
             """
             emailext(
                     subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                    body: '${FILE, path="./email-html.template"}',
+                    body: '${FILE, path="jenkins-email.html"}',
                     to: 'xtazxz@qq.com',
                     from: 'PEP Jenkins <devops@pep.com.cn>'
             )
@@ -43,13 +44,14 @@ pipeline {
             sh """
                 echo 构建失败
                 pwd
-                sed -i "s/#APPLICATION#/${APPLICATION}/g" ./email-html.template
-                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" ./email-html.template
-                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" ./email-html.template
+                ls -rlt
+                sed -i "s/#APPLICATION#/${APPLICATION}/g" jenkins-email.html
+                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" jenkins-email.html
+                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" jenkins-email.html
             """
             emailext(
                     subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                    body: '${FILE, path="./email-html.template"}',
+                    body: '${FILE, path="jenkins-email.html"}',
                     to: 'xtazxz@qq.com',
                     from: 'PEP Jenkins <devops@pep.com.cn>'
             )
