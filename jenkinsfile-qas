@@ -10,6 +10,7 @@ node('devops') {
     stage("package") {
         checkout scm
         sh """
+           mvn package
            more README.md
         """
     }
