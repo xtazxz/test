@@ -25,9 +25,12 @@ pipeline {
 
     post {
         success {
-            sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
-            sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
-            sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
+            sh """
+                pwd
+                sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
+                sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
+                sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
+            """
             emailext(
                     subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                     body: '${FILE, path="email-html.template"}',
@@ -36,9 +39,11 @@ pipeline {
             )
         }
         failure {
-            sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
-            sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
-            sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
+            sh """
+                sh 'sed -i "s/#APPLICATION#/${APPLICATION}/g" email-html.template'
+                sh 'sed -i "s/#JOB_NAME#/${JOB_NAME}/g" email-html.template'
+                sh 'sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" email-html.template'
+            """
             emailext(
                     subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
                     body: '${FILE, path="email-html.template"}',
