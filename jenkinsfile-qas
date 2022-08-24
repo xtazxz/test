@@ -32,12 +32,6 @@ pipeline {
 
     post {
         always {
-            sh """
-                sed -i "s#PARAM_JOB_NAME#${env.JOB_NAME}#g" jenkins-email.template
-                sed -i "s#PARAM_BUILD_NUMBER#${BUILD_NUMBER}#g" jenkins-email.template
-                sed -i "s#PARAM_RESULT#${currentBuild.result}#g" jenkins-email.template
-                sed -i "s#PARAM_BUILD_URL#${BUILD_URL}console#g" jenkins-email.template
-            """
             emailext(
                     subject: '[Jenkins Job]: ${BUILD_STATUS} - ${JOB_NAME} (#${BUILD_NUMBER})',
                     body: '${FILE, path="jenkins-email.template"}',
