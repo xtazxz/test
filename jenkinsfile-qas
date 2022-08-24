@@ -11,12 +11,14 @@ pipeline {
         SERVER_CREDENTIALS = "s-pep-java-in-test_192.168.104.167"
     }
 
-    stage("package") {
-        checkout scm
-        sh """
+    stages {
+        stage("package") {
+            checkout scm
+            sh """
            mvn package
            more README.md
         """
+        }
     }
 
     post {
