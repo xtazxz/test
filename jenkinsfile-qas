@@ -9,16 +9,13 @@ pipeline {
         APPLICATION = "email"
         SERVER_IP = "192.168.104.167"
         SERVER_CREDENTIALS = "s-pep-java-in-test_192.168.104.167"
+        NOTIFICATION_EMAIL_TEMPLATE = "jenkins-email.template"
     }
 
     stages {
-        stage("Checkout") {
-            steps {
-                checkout scm
-            }
-        }
         stage("Package") {
             steps {
+                checkout scm
                 sh """
                     mvn package
                     more README.md
@@ -35,34 +32,16 @@ pipeline {
     }
 
     post {
-        success {
+        always {
             sh """
-                echo 构建成功
-                pwd
-                ls -rlt
-                sed -i "s/#APPLICATION#/${APPLICATION}/g" jenkins-email.html
-                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" jenkins-email.html
-                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" jenkins-email.html
+                sed -i "s/#APPLICATION#/${APPLICATION}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
+                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
+                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
+                sed -i "s/#CAUSE#/${CAUSE}/g" ${NOTIFICATION_EMAIL_TEMPLATE}
             """
             emailext(
-                    subject: '[构建成功]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                    body: '${FILE, path="jenkins-email.html"}',
-                    to: 'xtazxz@qq.com',
-                    from: 'PEP Jenkins <devops@pep.com.cn>'
-            )
-        }
-        failure {
-            sh """
-                echo 构建失败
-                pwd
-                ls -rlt
-                sed -i "s/#APPLICATION#/${APPLICATION}/g" jenkins-email.html
-                sed -i "s/#JOB_NAME#/${JOB_NAME}/g" jenkins-email.html
-                sed -i "s/#BUILD_NUMBER#/${BUILD_NUMBER}/g" jenkins-email.html
-            """
-            emailext(
-                    subject: '[构建失败]: ${env.JOB_NAME} [${env.BUILD_NUMBER}]',
-                    body: '${FILE, path="jenkins-email.html"}',
+                    subject: '[构建${BUILD_STATUS}]: ${JOB_NAME} [${BUILD_NUMBER}]',
+                    body: '${FILE, path="${NOTIFICATION_EMAIL_TEMPLATE}"}',
                     to: 'xtazxz@qq.com',
                     from: 'PEP Jenkins <devops@pep.com.cn>'
             )
