@@ -41,7 +41,7 @@ pipeline {
                 echo '[构建${currentBuild.result}]: ${JOB_NAME} [${BUILD_NUMBER}]'
                 echo '${SEND_RESULT_TO}'
             """
-            def RESULT = "${currentBuild.result}";
+            RESULT = "${currentBuild.result}"
             sh """
                 echo "${RESULT}"
             """
