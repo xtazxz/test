@@ -1,10 +1,7 @@
 <body>
-<p>This is an inform that we are doing MTP right now. </p >
-<p>应用名称: #APPLICATION#</p >
-<p>构建信息: #JOB_NAME#(#BUILD_NUMBER#)</p >
-<p>构建状态: #CAUSE#</p >
-<p>构建结果: #CAUSE#</p >
-<p>构建地址: BUILD_URL</p >
+<p>构建信息: PARAM_JOB_NAME (#PARAM_BUILD_NUMBER)</p>
+<p>构建结果: PARAM_RESULT</p>
+<p>构建日志: PARAM_BUILD_URL</p>
 <br>
-<p style="color: red;font-style: initial;">通知邮件, 请勿回复!!!</p >
+<p style="color: red;font-style: initial;">通知邮件, 请勿回复!!!</p>
 </body>
