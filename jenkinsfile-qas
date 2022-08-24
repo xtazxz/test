@@ -17,6 +17,7 @@ pipeline {
             steps {
                 checkout scm
                 sh """
+                    mvn clean package
                     more README.md
                 """
             }
