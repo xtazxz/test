@@ -15,17 +15,21 @@ pipeline {
     stages {
         stage("Package") {
             steps {
-                checkout scm
-                sh """
-                    more README.md
-                """
+                script {
+                    checkout scm
+                    sh """
+                        more README.md
+                    """
+                }
             }
         }
         stage("Deploy") {
             steps {
-                sh """
-                    echo deploy success
-                """
+                script {
+                    sh """
+                        echo deploy success
+                    """
+                }
             }
         }
     }
