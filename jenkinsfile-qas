@@ -40,9 +40,10 @@ pipeline {
                 sed -i "s#PARAM_BUILD_URL#${BUILD_URL}console#g" jenkins-email.template
                 echo '[构建${currentBuild.result}]: ${JOB_NAME} [${BUILD_NUMBER}]'
                 echo '${SEND_RESULT_TO}'
+                echo '============='
             """
-            println('[构建${currentBuild.result}]: ${JOB_NAME} [${BUILD_NUMBER}]')
-            println('${SEND_RESULT_TO}')
+            println(env.SEND_RESULT_TO)
+            println([构建${currentBuild.result}]: env.JOB_NAME (env.BUILD_NUMBER))
             emailext(
                     subject: '[构建${BUILD_RESULT}]: ${JOB_NAME} (${BUILD_NUMBER})',
                     body: '${FILE, path="jenkins-email.template"}',
